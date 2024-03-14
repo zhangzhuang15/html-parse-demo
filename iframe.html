@@ -7,7 +7,33 @@
 </head>
 <body>
     <script type="text/javascript"> 
-        console.log('iframe.html: coming')
+        (function(){
+            console.log('iframe.html: coming')
+            const isPrimeNumber = (value) => {
+                if (value < 2 || value % 2 === 0) {
+                    return false
+                }
+
+                const m = Math.sqrt(value) + 1;
+                for (let i = 3; i < m; i += 2) {
+                    if (value % i === 0) {
+                        return false
+                    }
+                }
+
+                return true
+            }
+
+            let result = 0;
+            for (let i = 25000000; i > 100; i -= 1) {
+                if (isPrimeNumber(i)) {
+                    result += 1
+                }
+            }
+
+            console.log('prime number: ', result)
+            
+        })()
     </script>
     <script>
         window.addEventListener("DOMContentLoaded", () => {
