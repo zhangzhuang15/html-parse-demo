@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript"> 
+        console.log('iframe.html: coming')
+    </script>
+    <script>
+        window.addEventListener("DOMContentLoaded", () => {
+            console.log('iframe.html: DOMContentLoaded')
+        })
+
+        window.addEventListener("load", () => {
+            console.log("iframe.html: load")
+        })
+    </script>
+
+    <script defer type="text/javascript" src="http://localhost:8077/js/iframe-sleep-2s.js"></script>
+    <script async type="text/javascript" src="http://localhost:8077/js/iframe-sleep-3s.js"></script>
+</body>
+</html>

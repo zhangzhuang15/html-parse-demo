@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+        // 1: 验证此处的script会阻塞html parse
+        (function(){
+            const main = document.getElementById('main')
+            if (main === null) {
+                console.log('1')
+            }
+
+        })()
+    </script>
+    <script async type="text/javascript">
+        // 2: 验证 async script 是否阻塞 html pars
+        (function(){
+            const main = document.getElementById('main')
+            if (main === null) {
+                console.log('21')
+            } else {
+                console.log('22')
+            }
+        })()
+    </script>
+    <script defer type="text/javascript">
+        // 3: 验证 defer script 是否阻塞 html parse
+        (function(){
+            const main = document.getElementById('main')
+            if (main === null) {
+                console.log('31')
+            } else {
+                console.log('32')
+            }
+        })()
+    </script>
+</head>
+<body>
+    <script type="text/javascript">
+        window.addEventListener("load", () => {
+            console.log('index.html: load')
+        })
+
+        window.addEventListener("DOMContentLoaded", () => {
+            console.log('index.html: DOMContentLoaded')
+        })
+    </script>
+
+    <script type="text/javascript">
+        // 4: 验证此处 script 阻塞 html parse
+        (function(){
+            const main = document.getElementById('main')
+            if (main === null) {
+                console.log('41')
+            } else {
+                console.log('42')
+            }
+        })()
+    </script>
+
+    <script type="text/javascript">
+        // 5: 验证此处 script 阻塞 html parse
+        (function(){
+            const iframe = document.getElementById('iframe')
+            if (iframe === null) {
+                console.log('51')
+            } else {
+                console.log('52')
+            }
+        }
+        )()
+    </script>
+
+    <!-- 服务端接到请求，2s之后返回js -->
+    <script defer src="http://localhost:8077/js/sleep-2s.js"></script>
+
+    <!-- 服务端接到请求，3s之后返回js -->
+    <script async src="http://localhost:8077/js/sleep-3s.js"></script>
+
+    <div id="main"></div>
+
+    <iframe id="iframe" src="http://localhost:8077/iframe.html"></iframe>
+
+    <script type="text/javascript">
+        (function(){
+            console.log('6');
+            const iframe = document.getElementById('iframe')
+            iframe.addEventListener("load", () => {
+                console.log('index.html: iframe load')
+            })
+        })()
+    </script>
+</body>
+</html>
