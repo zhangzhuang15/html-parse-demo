@@ -55,8 +55,9 @@ func (*DefaultHandler) ServeHTTP(writer http.ResponseWriter, req *http.Request) 
 }
 
 func main() {
-	tip := "http server is running.\n" +
-		"visit http://localhost:8077/index.html."
+	tip := `hello
+http server is running.
+visit http://localhost:8077/index.html.`
 
 	fmt.Println(tip)
 
